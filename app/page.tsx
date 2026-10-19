@@ -66,7 +66,16 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="relative order-1 flex h-64 items-center justify-center md:order-2 md:h-[22rem]">
-          <WatchArt visual={HERO_VISUAL} className="h-full w-auto rotate-[-8deg] drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
+          {trending?.photo_id ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={`/api/photos/${trending.photo_id}`}
+              alt={`${trending.brand} ${trending.model}`}
+              className="h-full w-full object-cover md:rounded-l-[1.75rem]"
+            />
+          ) : (
+            <WatchArt visual={HERO_VISUAL} className="h-full w-auto rotate-[-8deg] drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
+          )}
         </div>
       </section>
 
@@ -85,7 +94,7 @@ export default async function HomePage() {
               className="flex w-[5.5rem] shrink-0 snap-start flex-col items-center gap-2"
             >
               <span className="stage grid h-[5.5rem] w-[5.5rem] place-items-center overflow-hidden rounded-2xl border border-line">
-                <WatchArt visual={parseVisual(b.visual)} className="h-[4.6rem] w-auto" />
+                <WatchMedia photoId={b.photo_id} visual={b.visual} alt={b.brand} artClassName="h-[4.6rem] w-auto" />
               </span>
               <span className="w-full truncate text-center text-[13px] font-medium">{b.brand}</span>
               <span className="-mt-2 text-[11px] text-faint">{b.count} annonce{b.count > 1 ? "s" : ""}</span>
