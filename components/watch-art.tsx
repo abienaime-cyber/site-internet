@@ -26,9 +26,12 @@ function isLight(hex: string): boolean {
 const CX = 100;
 const CY = 140;
 
+// Arrondi : Math.cos peut différer au dernier chiffre entre Node et le navigateur.
+const r2 = (n: number) => Math.round(n * 100) / 100;
+
 function polar(r: number, deg: number): [number, number] {
   const rad = ((deg - 90) * Math.PI) / 180;
-  return [CX + r * Math.cos(rad), CY + r * Math.sin(rad)];
+  return [r2(CX + r * Math.cos(rad)), r2(CY + r * Math.sin(rad))];
 }
 
 function arc(r1: number, r2: number, from: number, to: number): string {
@@ -302,13 +305,13 @@ export function WatchArt({ visual, className }: { visual: WatchVisual; className
               <circle cx={x} cy={y} r={dialR * 0.24} fill={subColor} stroke={lightDial ? "#00000040" : "#ffffff30"} strokeWidth={0.8} />
               {Array.from({ length: 12 }, (_, k) => {
                 const a = ((k * 30 - 90) * Math.PI) / 180;
-                const r1 = dialR * 0.24 - 1.2;
-                const r2 = dialR * 0.24 - 3.6;
+                const rOut = dialR * 0.24 - 1.2;
+                const rIn = dialR * 0.24 - 3.6;
                 return (
-                  <line key={k} x1={x + r1 * Math.cos(a)} y1={y + r1 * Math.sin(a)} x2={x + r2 * Math.cos(a)} y2={y + r2 * Math.sin(a)} stroke={lightDial ? "#eceae4" : "#eceae4"} strokeOpacity={0.6} strokeWidth={0.6} />
+                  <line key={k} x1={r2(x + rOut * Math.cos(a))} y1={r2(y + rOut * Math.sin(a))} x2={r2(x + rIn * Math.cos(a))} y2={r2(y + rIn * Math.sin(a))} stroke="#eceae4" strokeOpacity={0.6} strokeWidth={0.6} />
                 );
               })}
-              <line x1={x} y1={y} x2={x + 6 * Math.cos((deg * 7 * Math.PI) / 180)} y2={y + 6 * Math.sin((deg * 7 * Math.PI) / 180)} stroke="#eceae4" strokeWidth={1} />
+              <line x1={x} y1={y} x2={r2(x + 6 * Math.cos((deg * 7 * Math.PI) / 180))} y2={r2(y + 6 * Math.sin((deg * 7 * Math.PI) / 180))} stroke="#eceae4" strokeWidth={1} />
             </g>
           );
         })}
