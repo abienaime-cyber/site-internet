@@ -27,6 +27,9 @@ export async function AppNav() {
             <Link href="/annonces" className="rounded-full px-3 py-2 text-muted transition hover:text-text">
               Acheter
             </Link>
+            <Link href="/galerie" className="rounded-full px-3 py-2 text-muted transition hover:text-text">
+              Galerie
+            </Link>
             <Link href="/favoris" className="rounded-full p-2.5 text-muted transition hover:text-text" aria-label="Favoris">
               <HeartIcon />
             </Link>

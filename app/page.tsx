@@ -94,6 +94,20 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Galerie */}
+      <Link
+        href="/galerie"
+        className="mb-8 flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface p-4 transition hover:border-line-strong"
+      >
+        <span>
+          <span className="block text-[15px] font-semibold">Galerie des maisons</span>
+          <span className="block text-sm text-muted">Rolex, Audemars Piguet, Richard Mille, Tudor, Patek Philippe</span>
+        </span>
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line-strong">
+          <ArrowUpRightIcon size={18} />
+        </span>
+      </Link>
+
       {/* Pour vous */}
       <section className="mb-8">
         <SectionHeader title="Pour vous" href="/annonces" />
