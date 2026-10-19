@@ -41,11 +41,9 @@ export function FavoriteButton({
       disabled={pending}
       aria-pressed={favorite}
       aria-label={favorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-      className={`${dimension} grid place-items-center rounded-full border border-white/10 bg-ink/55 backdrop-blur-md transition active:scale-90 ${
-        favorite ? "text-white" : "text-white/80 hover:text-white"
-      }`}
+      className={`${dimension} grid place-items-center rounded-full border border-line bg-surface/90 text-text backdrop-blur-md transition active:scale-90`}
     >
-      <HeartIcon size={size === "lg" ? 20 : 16} filled={favorite} className={favorite ? "text-[#ff5a6e]" : ""} />
+      <HeartIcon size={size === "lg" ? 20 : 16} filled={favorite} />
     </button>
   );
 }

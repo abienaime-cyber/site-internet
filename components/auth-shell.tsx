@@ -9,8 +9,7 @@ export function AuthShell({ title, subtitle, children }: { title: string; subtit
     <main className="mx-auto grid min-h-[calc(100dvh-7rem)] max-w-5xl items-center gap-10 px-5 pt-[max(env(safe-area-inset-top),1.5rem)] md:grid-cols-2 md:pt-10">
       <div className="relative hidden h-[30rem] overflow-hidden rounded-[2rem] md:block">
         <div className="stage absolute inset-0" />
-        <div className="absolute -right-10 top-10 h-60 w-60 rounded-full bg-copper/30 blur-3xl" />
-        <WatchArt visual={VISUAL} className="absolute left-1/2 top-1/2 h-[26rem] w-auto -translate-x-1/2 -translate-y-1/2 rotate-[10deg] drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]" />
+        <WatchArt visual={VISUAL} className="absolute left-1/2 top-1/2 h-[26rem] w-auto -translate-x-1/2 -translate-y-1/2 rotate-[10deg] drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
         <p className="absolute bottom-6 left-6 right-6 text-2xl font-light leading-snug">
           Le temps se transmet.
           <br />

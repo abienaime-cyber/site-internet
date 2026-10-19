@@ -98,7 +98,7 @@ export function FiltersPanel({ filters, initiallyOpen, count }: { filters: Searc
 
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Filtres">
-          <button type="button" aria-label="Fermer" className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <button type="button" aria-label="Fermer" className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setOpen(false)} />
           <div className="absolute inset-x-0 bottom-0 max-h-[88dvh] overflow-y-auto rounded-t-[1.75rem] border-t border-line-strong bg-surface px-5 pb-[max(env(safe-area-inset-bottom),1.25rem)] pt-3">
             <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-line-strong" />
             <div className="mb-4 flex items-center justify-between">

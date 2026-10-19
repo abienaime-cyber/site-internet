@@ -40,7 +40,7 @@ export async function AppNav() {
             </Link>
             <Link
               href="/vendre"
-              className="ml-2 flex items-center gap-1.5 rounded-full bg-text px-4 py-2 font-semibold text-ink transition hover:bg-white"
+              className="ml-2 flex items-center gap-1.5 rounded-full bg-text px-4 py-2 font-semibold text-ink transition hover:bg-text/85"
             >
               <PlusIcon size={16} /> Vendre
             </Link>
@@ -49,7 +49,7 @@ export async function AppNav() {
                 <Avatar name={user.name} hue={user.avatar_hue} size={36} />
               </Link>
             ) : (
-              <Link href="/connexion" className="ml-2 rounded-full border border-line-strong px-4 py-2 font-medium hover:bg-white/5">
+              <Link href="/connexion" className="ml-2 rounded-full border border-line-strong px-4 py-2 font-medium hover:bg-black/5">
                 Connexion
               </Link>
             )}

@@ -22,7 +22,7 @@ export function BottomNav({ unread, signedIn }: { unread: number; signedIn: bool
       className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] md:hidden"
       aria-label="Navigation principale"
     >
-      <div className="mx-auto flex max-w-md items-center justify-between gap-1 rounded-[1.4rem] border border-line bg-[#0d0e12]/95 p-1.5 backdrop-blur-xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]">
+      <div className="mx-auto flex max-w-md items-center justify-between gap-1 rounded-[1.4rem] border border-line bg-surface/95 p-1.5 backdrop-blur-xl shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]">
         {ITEMS.map(({ href, label, icon: Icon, match, primary }) => {
           const active = match(pathname);
           const target = href === "/compte" && !signedIn ? "/connexion" : href;

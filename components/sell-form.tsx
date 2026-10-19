@@ -149,7 +149,7 @@ export function SellForm({ defaultCity }: { defaultCity: string }) {
               {["#111317", "#23406f", "#e9e8e3", "#1f4d3a", "#6b6f76", "#7a1f2b"].map((c, i) => (
                 <label key={c} className="cursor-pointer">
                   <input type="radio" name="dial" value={c} defaultChecked={i === 0} className="peer sr-only" />
-                  <span className="block h-8 w-8 rounded-full border-2 border-transparent ring-1 ring-white/20 peer-checked:border-text" style={{ background: c }} />
+                  <span className="block h-8 w-8 rounded-full border-2 border-transparent ring-1 ring-black/15 peer-checked:border-text" style={{ background: c }} />
                 </label>
               ))}
             </div>
