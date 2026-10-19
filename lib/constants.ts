@@ -9,7 +9,7 @@ export const BRANDS = [
   "Breitling",
   "Hublot",
   "Panerai",
-  "Grand Seiko",
+  "Seiko",
   "Vacheron Constantin",
   "Jaeger-LeCoultre",
   "TAG Heuer",
