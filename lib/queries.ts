@@ -206,3 +206,47 @@ export function countUnread(userId: number): number {
     .get({ u: userId }) as { n: number };
   return row.n;
 }
+
+export type OrderRow = {
+  id: number;
+  listing_id: number;
+  amount: number;
+  status: string;
+  created_at: string;
+  paid_at: string | null;
+  brand: string;
+  model: string;
+  reference: string;
+  visual: string;
+  photo_id: number | null;
+  other_name: string;
+  other_id: number;
+  reviewed: 0 | 1;
+};
+
+const ORDER_COLUMNS = `
+  o.id, o.listing_id, o.amount, o.status, o.created_at, o.paid_at,
+  l.brand, l.model, l.reference, l.visual,
+  (SELECT p.id FROM listing_photos p WHERE p.listing_id = l.id ORDER BY p.position LIMIT 1) AS photo_id,
+  EXISTS (SELECT 1 FROM reviews r WHERE r.order_id = o.id) AS reviewed
+`;
+
+export function getPurchases(userId: number): OrderRow[] {
+  return getDb()
+    .prepare(
+      `SELECT ${ORDER_COLUMNS}, u.name AS other_name, u.id AS other_id
+       FROM orders o JOIN listings l ON l.id = o.listing_id JOIN users u ON u.id = o.seller_id
+       WHERE o.buyer_id = ? AND o.status = 'paid' ORDER BY o.paid_at DESC`,
+    )
+    .all(userId) as OrderRow[];
+}
+
+export function getSales(userId: number): OrderRow[] {
+  return getDb()
+    .prepare(
+      `SELECT ${ORDER_COLUMNS}, u.name AS other_name, u.id AS other_id
+       FROM orders o JOIN listings l ON l.id = o.listing_id JOIN users u ON u.id = o.buyer_id
+       WHERE o.seller_id = ? AND o.status = 'paid' ORDER BY o.paid_at DESC`,
+    )
+    .all(userId) as OrderRow[];
+}
