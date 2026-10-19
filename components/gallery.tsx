@@ -31,7 +31,7 @@ export function Gallery({ photoIds, visual, alt }: { photoIds: number[]; visual:
       <div className="grid h-full w-full place-items-center overflow-hidden">
         <WatchArt
           visual={visual}
-          className={`${large ? "h-[86%]" : "h-[80%]"} w-auto ${transform} drop-shadow-[0_28px_30px_rgba(0,0,0,0.6)] transition-transform duration-500`}
+          className={`${large ? "h-[86%]" : "h-[80%]"} w-auto ${transform} drop-shadow-[0_28px_30px_rgba(0,0,0,0.18)] transition-transform duration-500`}
         />
       </div>
     );
@@ -40,14 +40,13 @@ export function Gallery({ photoIds, visual, alt }: { photoIds: number[]; visual:
   return (
     <div>
       <div className="stage relative aspect-square overflow-hidden rounded-[1.75rem] border border-line md:aspect-[4/3.6]">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-copper/15 to-transparent" />
         <div className="relative h-full w-full" role="img" aria-label={alt}>
           {render(current, true)}
         </div>
         {slides.length > 1 && (
           <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
             {slides.map((_, i) => (
-              <span key={i} className={`h-1.5 rounded-full transition-all ${i === index ? "w-5 bg-text" : "w-1.5 bg-white/30"}`} />
+              <span key={i} className={`h-1.5 rounded-full transition-all ${i === index ? "w-5 bg-text" : "w-1.5 bg-text/20"}`} />
             ))}
           </div>
         )}
@@ -62,7 +61,7 @@ export function Gallery({ photoIds, visual, alt }: { photoIds: number[]; visual:
               aria-label={`Vue ${i + 1}`}
               aria-current={i === index}
               className={`stage h-20 w-24 shrink-0 overflow-hidden rounded-[1.1rem] border transition ${
-                i === index ? "border-text/80 ring-2 ring-copper/40" : "border-line opacity-70 hover:opacity-100"
+                i === index ? "border-text/80 ring-2 ring-text/15" : "border-line opacity-70 hover:opacity-100"
               }`}
             >
               {render(slide, false)}

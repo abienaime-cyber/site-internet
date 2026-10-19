@@ -43,8 +43,6 @@ export default async function HomePage() {
 
       {/* Hero */}
       <section className="glass relative mb-6 overflow-hidden rounded-[1.75rem] md:grid md:grid-cols-[1.1fr_1fr] md:items-center">
-        <div className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full bg-copper/25 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -left-10 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
         <div className="relative order-2 px-5 pb-5 pt-2 md:order-1 md:p-10">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.22em] text-muted">
             {user ? `Bonjour ${user.name.split(" ")[0]}` : "Entre particuliers"}
@@ -59,7 +57,7 @@ export default async function HomePage() {
           </p>
           <Link
             href="/annonces"
-            className="mt-5 flex h-14 items-center justify-between overflow-hidden rounded-2xl bg-text pl-5 text-[15px] font-semibold text-ink transition active:scale-[0.98] md:max-w-xs"
+            className="mt-5 flex h-14 items-center justify-between overflow-hidden rounded-xl bg-text pl-5 text-[15px] font-semibold text-ink transition active:scale-[0.98] md:max-w-xs"
           >
             Explorer les annonces
             <span className="grid h-full w-16 place-items-center bg-accent text-white">
@@ -68,7 +66,7 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="relative order-1 flex h-64 items-center justify-center md:order-2 md:h-[22rem]">
-          <WatchArt visual={HERO_VISUAL} className="h-full w-auto rotate-[-8deg] drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]" />
+          <WatchArt visual={HERO_VISUAL} className="h-full w-auto rotate-[-8deg] drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
         </div>
       </section>
 

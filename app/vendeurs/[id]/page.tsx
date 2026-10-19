@@ -29,7 +29,6 @@ export default async function SellerPage({ params }: PageProps<"/vendeurs/[id]">
       <PageHeader title="Profil vendeur" back="/annonces" />
 
       <section className="glass relative overflow-hidden rounded-[1.75rem] p-5 md:p-7">
-        <div className="pointer-events-none absolute -right-10 -top-16 h-52 w-52 rounded-full bg-copper/25 blur-3xl" />
         <div className="relative flex items-center gap-4">
           <Avatar name={seller.name} hue={seller.avatar_hue} size={72} />
           <div className="min-w-0">

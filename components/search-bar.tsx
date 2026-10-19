@@ -11,13 +11,13 @@ export function SearchBar({ defaultValue = "", filtersHref = "/annonces?filtres=
           defaultValue={defaultValue}
           placeholder="Rechercher une montre…"
           aria-label="Rechercher une montre"
-          className="h-13 w-full rounded-2xl border border-line bg-surface pl-11 pr-4 text-[15px] outline-none placeholder:text-faint focus:border-accent/60"
+          className="h-13 w-full rounded-xl border border-line bg-surface pl-11 pr-4 text-[15px] outline-none placeholder:text-faint focus:border-accent/60"
         />
       </form>
       <Link
         href={filtersHref}
         aria-label="Filtres"
-        className="grid h-13 w-13 shrink-0 place-items-center rounded-2xl bg-text text-ink transition active:scale-95"
+        className="grid h-13 w-13 shrink-0 place-items-center rounded-xl bg-text text-ink transition active:scale-95"
       >
         <SlidersIcon size={20} />
       </Link>

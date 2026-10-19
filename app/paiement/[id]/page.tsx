@@ -37,7 +37,6 @@ export default async function CheckoutPage({ params, searchParams }: PageProps<"
       )}
 
       <section className="glass relative overflow-hidden rounded-[1.75rem] p-4">
-        <div className="pointer-events-none absolute -right-10 -top-16 h-48 w-48 rounded-full bg-copper/25 blur-3xl" />
         <div className="relative flex gap-4">
           <div className="stage h-28 w-28 shrink-0 overflow-hidden rounded-2xl">
             <WatchMedia photoId={listing.photo_id} visual={listing.visual} alt={`${listing.brand} ${listing.model}`} />

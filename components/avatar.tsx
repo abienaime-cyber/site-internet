@@ -3,7 +3,7 @@ import { initials } from "@/lib/format";
 export function Avatar({ name, hue, size = 40 }: { name: string; hue: number; size?: number }) {
   return (
     <span
-      className="grid shrink-0 place-items-center rounded-full font-semibold text-white ring-1 ring-white/15"
+      className="grid shrink-0 place-items-center rounded-full font-semibold text-white ring-1 ring-black/5"
       style={{
         width: size,
         height: size,
