@@ -35,9 +35,6 @@ const USERS: SeedUser[] = [
 ];
 
 const LISTINGS: SeedListing[] = [
-  { seller: 0, brand: "Rolex", model: "Submariner Date", reference: "126610LN", year: 2021, condition: "tres_bon", box: true, papers: true, price: 12_900, size: 41, material: "Acier Oystersteel", movement: "Automatique", daysAgo: 1,
-    description: "Achetée en boutique en 2021, portée le week-end. Quelques micro-rayures sur le fermoir, verre et lunette impeccables. Boîte, carte de garantie et maillons supplémentaires fournis.",
-    visual: { shape: "round", metal: "steel", dial: "#111317", bezel: "diver", bezelColor: "#0d0e10", strap: "bracelet", date: true } },
   { seller: 1, brand: "Rolex", model: "GMT-Master", reference: "1675", year: null, condition: "bon", box: false, papers: false, price: 18_500, size: null, material: "Acier", movement: "Automatique", daysAgo: 2,
     description: "Lunette Pepsi bleu et rouge, bracelet Oyster. Traces d'usage normales pour une montre de cet âge. Vendue sans boîte ni papiers. Photo : Thierry Mostra-store, Wikimedia Commons, licence CC BY-SA 4.0.",
     visual: { shape: "round", metal: "steel", dial: "#101216", bezel: "gmt", bezelColor: "#1f3f8f", bezelColor2: "#a3242c", strap: "bracelet", date: true } },
@@ -47,48 +44,12 @@ const LISTINGS: SeedListing[] = [
   { seller: 3, brand: "Rolex", model: "Explorer", reference: "14270", year: 2001, condition: "tres_bon", box: true, papers: false, price: 7_900, size: null, material: "Acier", movement: "Automatique", daysAgo: 4,
     description: "Cadran noir 3-6-9, bracelet Oyster. Datée vers 2001. Fournie avec sa boîte, sans papiers. Photo : Thierry Mostra-store, Wikimedia Commons, licence CC BY-SA 4.0.",
     visual: { shape: "round", metal: "steel", dial: "#0f1013", bezel: "smooth", strap: "bracelet", date: false } },
-  { seller: 0, brand: "Rolex", model: "Cosmograph Daytona", reference: "116500LN", year: 2017, condition: "tres_bon", box: true, papers: true, price: 27_500, size: 40, material: "Acier Oystersteel", movement: "Chronographe automatique", daysAgo: 5,
-    description: "Cadran blanc, lunette céramique noire. Entretien complet réalisé l'an dernier, facture fournie. Set complet.",
-    visual: { shape: "round", metal: "steel", dial: "#e9e8e3", bezel: "tachy", bezelColor: "#121316", strap: "bracelet", subdials: 3, date: false, accent: "#121316" } },
   { seller: 4, brand: "Omega", model: "Speedmaster Professional", reference: "", year: 1978, condition: "bon", box: false, papers: false, price: 5_600, size: null, material: "Acier", movement: "Chronographe à remontage manuel", daysAgo: 2, photo: "speedmaster-861",
     description: "Calibre 861, datée vers 1978. Cadran patiné, aiguilles d'origine. Vendue seule. Photo : Thierry Mostra-store, Wikimedia Commons, licence CC BY-SA 4.0.",
     visual: { shape: "round", metal: "steel", dial: "#121316", bezel: "tachy", bezelColor: "#0c0d0f", strap: "bracelet", subdials: 3, date: false } },
-  { seller: 1, brand: "Omega", model: "Seamaster Diver 300M", reference: "210.30.42.20.01.001", year: 2019, condition: "bon", box: true, papers: false, price: 3_900, size: 42, material: "Acier", movement: "Automatique", daysAgo: 6,
-    description: "Cadran vagues noir. Petite marque sur la lunette, visible en lumière rasante. Boîte d'origine, carte égarée lors d'un déménagement.",
-    visual: { shape: "round", metal: "steel", dial: "#16181c", bezel: "diver", bezelColor: "#101114", strap: "bracelet", date: true } },
-  { seller: 2, brand: "Tudor", model: "Black Bay 58", reference: "M79030N-0001", year: 2020, condition: "tres_bon", box: true, papers: true, price: 3_100, size: 39, material: "Acier", movement: "Automatique", daysAgo: 1,
-    description: "Le format parfait pour un poignet de 17 cm. Bracelet rivé, toutes les attaches présentes. Set complet.",
-    visual: { shape: "round", metal: "steel", dial: "#111214", bezel: "diver", bezelColor: "#0e0f11", strap: "bracelet", date: false, accent: "#c9a45c" } },
-  { seller: 5, brand: "Tudor", model: "Pelagos", reference: "25600TN", year: 2017, condition: "bon", box: true, papers: true, price: 3_400, size: 42, material: "Titane", movement: "Automatique", daysAgo: 8,
-    description: "Titane, très légère. Bracelet titane avec boucle à rallonge automatique, plus le bracelet caoutchouc d'origine.",
-    visual: { shape: "round", metal: "titanium", dial: "#14161a", bezel: "diver", bezelColor: "#15171b", strap: "bracelet", date: true } },
-  { seller: 3, brand: "Cartier", model: "Santos de Cartier Grand Modèle", reference: "WSSA0018", year: 2020, condition: "tres_bon", box: true, papers: true, price: 6_200, size: 40, material: "Acier", movement: "Automatique", daysAgo: 3,
-    description: "Fournie avec le bracelet acier et le bracelet cuir, système QuickSwitch. Garantie internationale encore active.",
-    visual: { shape: "square", metal: "steel", dial: "#e6e4dc", bezel: "none", strap: "bracelet", date: false, accent: "#1f2b59" } },
-  { seller: 0, brand: "Audemars Piguet", model: "Royal Oak Selfwinding", reference: "15500ST", year: 2020, condition: "tres_bon", box: true, papers: true, price: 42_000, size: 41, material: "Acier", movement: "Automatique", daysAgo: 7,
-    description: "Cadran Grande Tapisserie bleu. Révisée par la marque, papiers et boîte présents. Visible à Paris sur rendez-vous.",
-    visual: { shape: "octagon", metal: "steel", dial: "#20375e", bezel: "none", strap: "bracelet", date: true } },
-  { seller: 3, brand: "Patek Philippe", model: "Nautilus", reference: "5711/1A", year: 2015, condition: "tres_bon", box: true, papers: true, price: 98_000, size: 40, material: "Acier", movement: "Automatique", daysAgo: 9,
-    description: "Cadran bleu dégradé. Achetée chez un concessionnaire agréé, historique complet. Transaction avec paiement sécurisé uniquement.",
-    visual: { shape: "cushion", metal: "steel", dial: "#1d3555", bezel: "none", strap: "bracelet", date: true } },
-  { seller: 4, brand: "IWC", model: "Montre d'Aviateur Mark XVIII", reference: "IW327001", year: 2018, condition: "bon", box: false, papers: true, price: 2_900, size: 40, material: "Acier", movement: "Automatique", daysAgo: 4,
-    description: "Très lisible, très confortable. Bracelet cuir marron récent. Papiers fournis, pas de boîte.",
-    visual: { shape: "round", metal: "steel", dial: "#141518", bezel: "smooth", strap: "leather", strapColor: "#5a3a24", date: true } },
   { seller: 5, brand: "Breitling", model: "Navitimer AOPA", reference: "806", year: 1960, condition: "bon", box: false, papers: false, price: 6_900, size: null, material: "Acier", movement: "Chronographe à remontage manuel", daysAgo: 2,
     description: "Navitimer AOPA de 1960, mouvement Venus. Bracelet cuir noir. Vendue seule. Photo : Thierry Mostra-store, Wikimedia Commons, licence CC BY-SA 4.0.",
     visual: { shape: "round", metal: "steel", dial: "#101114", bezel: "fluted", strap: "leather", strapColor: "#151515", subdials: 3, date: true } },
-  { seller: 1, brand: "Hublot", model: "Classic Fusion Titanium", reference: "542.NX.1171.RX", year: 2019, condition: "tres_bon", box: true, papers: true, price: 5_200, size: 42, material: "Titane", movement: "Automatique", daysAgo: 10,
-    description: "Bracelet caoutchouc noir d'origine. Aucun choc, verre parfait. Set complet.",
-    visual: { shape: "round", metal: "titanium", dial: "#121314", bezel: "smooth", strap: "rubber", strapColor: "#0d0d0e", date: true } },
-  { seller: 2, brand: "Panerai", model: "Luminor Marina", reference: "PAM01312", year: 2019, condition: "bon", box: true, papers: true, price: 5_400, size: 44, material: "Acier", movement: "Automatique", daysAgo: 11,
-    description: "Réserve de marche de trois jours. Bracelet cuir vieilli, boucle d'origine. Petites marques d'usage sur le pare-couronne.",
-    visual: { shape: "cushion", metal: "steel", dial: "#131416", bezel: "smooth", strap: "leather", strapColor: "#6b4428", date: true } },
-  { seller: 4, brand: "Grand Seiko", model: "Snowflake", reference: "SBGA211", year: 2021, condition: "tres_bon", box: true, papers: true, price: 4_800, size: 41, material: "Titane", movement: "Spring Drive", daysAgo: 5,
-    description: "Le cadran texturé est encore plus beau en vrai. Bracelet titane complet, aucun maillon retiré.",
-    visual: { shape: "round", metal: "titanium", dial: "#eef0ee", bezel: "smooth", strap: "bracelet", date: true, accent: "#2d4f8f" } },
-  { seller: 5, brand: "Vacheron Constantin", model: "Overseas", reference: "4500V/110A-B128", year: 2019, condition: "tres_bon", box: true, papers: true, price: 29_000, size: 41, material: "Acier", movement: "Automatique", daysAgo: 6,
-    description: "Cadran bleu laqué. Livrée avec ses trois bracelets : acier, cuir et caoutchouc. Garantie et boîte présentes.",
-    visual: { shape: "round", metal: "steel", dial: "#203a63", bezel: "smooth", strap: "bracelet", date: true } },
 ];
 
 const REVIEWS: { seller: number; author: number; rating: number; comment: string; daysAgo: number }[] = [
@@ -143,7 +104,7 @@ export function seedDatabase(db: DatabaseSync) {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     );
     const insertPhoto = db.prepare("INSERT INTO listing_photos (listing_id, position, mime, data) VALUES (?, ?, ?, ?)");
-    // Seules les montres qui ont une vraie photo dans seed-photos/ sont publiées.
+    // Une montre sans photo dans seed-photos/ n'est pas publiée.
     const avecPhotos = LISTINGS.map((l) => ({ l, photos: seedPhotos(l.photo ?? l.reference) })).filter((x) => x.photos.length);
     avecPhotos.forEach(({ l, photos }, i) => {
       const { lastInsertRowid } = insertListing.run(
