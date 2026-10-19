@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { sendMessage } from "@/app/actions/conversations";
 import { formatTime, parseDbDate } from "@/lib/format";
@@ -35,11 +35,14 @@ export function ChatThread({
   const [draft, setDraft] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
-  const [mounted, setMounted] = useState(false);
+  // Les libellés de jour dépendent du fuseau du navigateur : rendus côté client uniquement.
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastId = messages.at(-1)?.id ?? 0;
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ block: "end" });
@@ -93,7 +96,7 @@ export function ChatThread({
     });
   }
 
-  let previousDay = "";
+  const days = messages.map((m) => (mounted ? dayLabel(m.created_at) : ""));
 
   return (
     <>
@@ -110,11 +113,10 @@ export function ChatThread({
             </div>
           </div>
         )}
-        {messages.map((m) => {
+        {messages.map((m, i) => {
           const mine = m.sender_id === userId;
-          const day = mounted ? dayLabel(m.created_at) : "";
-          const showDay = day !== previousDay;
-          previousDay = day;
+          const day = days[i];
+          const showDay = i === 0 || day !== days[i - 1];
           return (
             <div key={m.id} className="flex flex-col">
               {showDay && day && <p className="my-3 text-center text-xs font-medium uppercase tracking-wider text-faint">{day}</p>}

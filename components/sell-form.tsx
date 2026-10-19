@@ -32,27 +32,35 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
 
 export function SellForm({ defaultCity }: { defaultCity: string }) {
   const [state, action, pending] = useActionState<ListingFormState, FormData>(createListing, undefined);
-  const [files, setFiles] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
+  const [photos, setPhotos] = useState<{ file: File; url: string }[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const photosRef = useRef(photos);
 
   useEffect(() => {
-    const urls = files.map((f) => URL.createObjectURL(f));
-    setPreviews(urls);
-    return () => urls.forEach((u) => URL.revokeObjectURL(u));
-  }, [files]);
+    photosRef.current = photos;
+  }, [photos]);
+
+  useEffect(() => () => photosRef.current.forEach((p) => URL.revokeObjectURL(p.url)), []);
 
   function addFiles(list: FileList | null) {
     if (!list) return;
     // Copie avant de vider l'input : la FileList est vidée en même temps.
-    const added = Array.from(list);
-    setFiles((prev) => [...prev, ...added].slice(0, MAX_PHOTOS));
+    const room = MAX_PHOTOS - photos.length;
+    const added = Array.from(list)
+      .slice(0, Math.max(room, 0))
+      .map((file) => ({ file, url: URL.createObjectURL(file) }));
+    setPhotos((prev) => [...prev, ...added]);
     if (inputRef.current) inputRef.current.value = "";
+  }
+
+  function removePhoto(index: number) {
+    URL.revokeObjectURL(photos[index].url);
+    setPhotos((prev) => prev.filter((_, j) => j !== index));
   }
 
   function submit(formData: FormData) {
     formData.delete("photos");
-    files.forEach((f) => formData.append("photos", f));
+    photos.forEach((p) => formData.append("photos", p.file));
     return action(formData);
   }
 
@@ -60,14 +68,14 @@ export function SellForm({ defaultCity }: { defaultCity: string }) {
     <form action={submit} className="flex flex-col gap-4">
       <Section step={1} title="Photos">
         <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-6">
-          {previews.map((src, i) => (
+          {photos.map(({ url: src }, i) => (
             <div key={src} className="relative aspect-square overflow-hidden rounded-xl border border-line">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={src} alt={`Photo ${i + 1}`} className="h-full w-full object-cover" />
               {i === 0 && <span className="absolute bottom-1 left-1 rounded-md bg-ink/80 px-1.5 py-0.5 text-[10px] font-semibold">Couverture</span>}
               <button
                 type="button"
-                onClick={() => setFiles((prev) => prev.filter((_, j) => j !== i))}
+                onClick={() => removePhoto(i)}
                 aria-label={`Retirer la photo ${i + 1}`}
                 className="absolute right-1 top-1 grid h-6 w-6 place-items-center rounded-full bg-ink/80"
               >
@@ -75,7 +83,7 @@ export function SellForm({ defaultCity }: { defaultCity: string }) {
               </button>
             </div>
           ))}
-          {files.length < MAX_PHOTOS && (
+          {photos.length < MAX_PHOTOS && (
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
