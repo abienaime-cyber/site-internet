@@ -151,16 +151,16 @@ export default async function ListingPage({ params }: PageProps<"/annonces/[id]"
           </div>
 
           {/* Actions : barre fixe sur mobile, bloc sur desktop */}
-          <div className="fixed inset-x-0 bottom-[5.6rem] z-30 px-4 md:static md:mt-6 md:px-0">
+          <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-ink/95 px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] backdrop-blur-xl md:static md:mt-6 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
             {isOwner ? (
-              <div className="glass mx-auto flex max-w-md items-center justify-between gap-3 rounded-2xl bg-ink/70 p-2 pl-4 md:max-w-none">
+              <div className="mx-auto flex max-w-md items-center justify-between gap-3 rounded-2xl md:glass md:max-w-none md:p-2 md:pl-4">
                 <span className="text-sm text-muted">C&apos;est votre annonce</span>
                 <Link href="/compte" className="rounded-xl bg-text px-4 py-3 text-sm font-semibold text-ink">
                   Gérer mes annonces
                 </Link>
               </div>
             ) : (
-              <div className="glass mx-auto flex max-w-md gap-2 rounded-2xl bg-ink/70 p-2 md:max-w-none">
+              <div className="mx-auto flex max-w-md gap-2 rounded-2xl md:glass md:max-w-none md:p-2">
                 <form action={startConversation} className="flex-1">
                   <input type="hidden" name="listingId" value={listing.id} />
                   <button type="submit" className="flex h-13 w-full items-center justify-center gap-2 rounded-xl border border-line-strong text-[15px] font-semibold">
