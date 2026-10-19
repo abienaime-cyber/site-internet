@@ -24,7 +24,12 @@
 }
 
 :root {
+<<<<<<< HEAD
   color-scheme: light;
+=======
+  --background: #ffffff;
+  --foreground: #62595900;
+>>>>>>> ilian
 }
 
 html {
