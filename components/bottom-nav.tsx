@@ -14,15 +14,15 @@ const ITEMS = [
 
 export function BottomNav({ unread, signedIn }: { unread: number; signedIn: boolean }) {
   const pathname = usePathname();
-  // Dans une conversation, la zone de saisie prend la place de la barre.
-  if (/^\/messages\/\d+/.test(pathname) || pathname.startsWith("/paiement")) return null;
+  // Conversation, fiche annonce et paiement ont leur propre barre d'action en bas.
+  if (/^\/(messages|annonces)\/\d+/.test(pathname) || pathname.startsWith("/paiement")) return null;
 
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] md:hidden"
       aria-label="Navigation principale"
     >
-      <div className="glass mx-auto flex max-w-md items-center justify-between gap-1 rounded-[1.4rem] bg-ink/70 p-1.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]">
+      <div className="mx-auto flex max-w-md items-center justify-between gap-1 rounded-[1.4rem] border border-line bg-[#0d0e12]/95 p-1.5 backdrop-blur-xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]">
         {ITEMS.map(({ href, label, icon: Icon, match, primary }) => {
           const active = match(pathname);
           const target = href === "/compte" && !signedIn ? "/connexion" : href;

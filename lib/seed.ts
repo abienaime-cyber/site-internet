@@ -1,4 +1,6 @@
 import type { DatabaseSync } from "node:sqlite";
+import fs from "node:fs";
+import path from "node:path";
 import { hashPassword } from "./password";
 import type { WatchVisual } from "./visual";
 
@@ -107,6 +109,21 @@ function daysAgo(days: number): string {
   return d.toISOString().slice(0, 19).replace("T", " ");
 }
 
+// Photos des annonces de départ : seed-photos/<référence>.jpg, puis <référence>-2.jpg, etc.
+// La référence est mise en minuscules, les caractères spéciaux deviennent des tirets.
+const PHOTOS_DIR = path.join(process.cwd(), "seed-photos");
+const MIME: Record<string, string> = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" };
+
+function seedPhotos(reference: string): { mime: string; data: Buffer }[] {
+  if (!fs.existsSync(PHOTOS_DIR)) return [];
+  const slug = reference.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return fs
+    .readdirSync(PHOTOS_DIR)
+    .filter((f) => MIME[path.extname(f).toLowerCase()] && new RegExp(`^${slug}(-\\d+)?\\.`, "i").test(f))
+    .sort((a, b) => a.length - b.length || a.localeCompare(b))
+    .map((f) => ({ mime: MIME[path.extname(f).toLowerCase()], data: fs.readFileSync(path.join(PHOTOS_DIR, f)) }));
+}
+
 export function seedDatabase(db: DatabaseSync) {
   db.exec("BEGIN");
   try {
@@ -123,12 +140,16 @@ export function seedDatabase(db: DatabaseSync) {
         description, case_size, material, movement, city, visual, created_at, views)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     );
+    const insertPhoto = db.prepare("INSERT INTO listing_photos (listing_id, position, mime, data) VALUES (?, ?, ?, ?)");
     LISTINGS.forEach((l, i) => {
-      insertListing.run(
+      const { lastInsertRowid } = insertListing.run(
         userIds[l.seller], l.brand, l.model, l.reference, l.year, l.condition, l.box ? 1 : 0, l.papers ? 1 : 0,
         l.price * 100, l.description, l.size, l.material, l.movement, USERS[l.seller].city.replace(/ \d+e$/, ""),
         JSON.stringify(l.visual), daysAgo(l.daysAgo), 40 + ((i * 37) % 260),
       );
+      seedPhotos(l.reference).forEach((photo, position) => {
+        insertPhoto.run(Number(lastInsertRowid), position, photo.mime, photo.data);
+      });
     });
 
     const insertReview = db.prepare(
