@@ -117,11 +117,44 @@ function open(): DatabaseSync {
   return db;
 }
 
-// Une seule connexion par processus, conservée entre les rechargements à chaud.
-const globalForDb = globalThis as unknown as { __remontoirDb?: DatabaseSync };
+type Params = Record<string, unknown> | unknown;
 
-export function getDb(): DatabaseSync {
-  if (!globalForDb.__remontoirDb) globalForDb.__remontoirDb = open();
+// node:sqlite renvoie des objets sans prototype, que React refuse de transmettre
+// aux composants client : on les recopie en objets ordinaires.
+export type Statement = {
+  get(...params: Params[]): unknown;
+  all(...params: Params[]): unknown[];
+  run(...params: Params[]): { changes: number | bigint; lastInsertRowid: number | bigint };
+};
+
+export type Db = {
+  prepare(sql: string): Statement;
+  exec(sql: string): void;
+};
+
+function wrap(db: DatabaseSync): Db {
+  return {
+    exec: (sql) => db.exec(sql),
+    prepare(sql) {
+      const stmt = db.prepare(sql);
+      const call = <T>(fn: (...args: never[]) => T, params: Params[]) => fn.apply(stmt, params as never[]);
+      return {
+        get: (...params) => {
+          const row = call(stmt.get, params);
+          return row ? { ...(row as object) } : undefined;
+        },
+        all: (...params) => call(stmt.all, params).map((row) => ({ ...(row as object) })),
+        run: (...params) => call(stmt.run, params),
+      };
+    },
+  };
+}
+
+// Une seule connexion par processus, conservée entre les rechargements à chaud.
+const globalForDb = globalThis as unknown as { __remontoirDb?: Db };
+
+export function getDb(): Db {
+  if (!globalForDb.__remontoirDb) globalForDb.__remontoirDb = wrap(open());
   return globalForDb.__remontoirDb;
 }
 
