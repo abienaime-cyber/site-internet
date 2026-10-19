@@ -146,13 +146,15 @@ export function getSellerListings(sellerId: number, viewerId: number | null, inc
     .all({ seller: sellerId, viewer: viewerId ?? 0 }) as ListingCardData[];
 }
 
-export type BrandCount = { brand: string; count: number; visual: string };
+export type BrandCount = { brand: string; count: number; visual: string; photo_id: number | null };
 
 export function getBrandCounts(): BrandCount[] {
   return getDb()
     .prepare(
       `SELECT l.brand, COUNT(*) AS count,
-        (SELECT l2.visual FROM listings l2 WHERE l2.brand = l.brand AND l2.status = 'active' ORDER BY l2.price DESC LIMIT 1) AS visual
+        (SELECT l2.visual FROM listings l2 WHERE l2.brand = l.brand AND l2.status = 'active' ORDER BY l2.price DESC LIMIT 1) AS visual,
+        (SELECT p.id FROM listings l2 JOIN listing_photos p ON p.listing_id = l2.id
+          WHERE l2.brand = l.brand AND l2.status = 'active' ORDER BY l2.price DESC, p.position LIMIT 1) AS photo_id
        FROM listings l WHERE l.status = 'active' GROUP BY l.brand ORDER BY count DESC, l.brand`,
     )
     .all() as BrandCount[];
